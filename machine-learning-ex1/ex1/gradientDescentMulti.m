@@ -17,13 +17,13 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-
-
-
-
-
-
-
+    % this is the same code as in gradientDescent.m for 1 feature
+    h = theta'*X';
+    diff = h - y';
+    delta = diff*X;
+    delta = delta/m;
+    delta = delta';
+    theta = theta-alpha*delta;   
 
 
 

@@ -21,8 +21,6 @@ for iter = 1:num_iters
     delta = diff*X;
     delta = delta/m;
     delta = delta';
-      
-    %disp(size(theta));
     theta = theta-alpha*delta;   
 
 
