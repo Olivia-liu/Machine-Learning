@@ -1,1 +1,2 @@
-# Personal project: monitor computer status using machine learning
+# Personal project
+monitor computer status using machine learning
