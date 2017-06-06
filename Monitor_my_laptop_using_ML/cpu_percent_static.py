@@ -15,7 +15,8 @@ def fetchCPUPercent(fileName, interval, tol_time):
 	dataFile = open(fileName,'a')
 
 	stime = round(time.time())
-	while var < t:
+
+	while var <= t:
 		dataFile.write(str(round(time.time())-stime))
 		dataFile.write(',')
 		dataFile.write(str(psutil.cpu_percent(interval=None)))
@@ -41,11 +42,10 @@ def loadData(fileName):
 	return (X, y)
 	
 def plotData(X, y):
-	#fig, ax = plt.subplots()
-
-	#ax.fill(X, y, zorder=10)
-	#ax.grid(True, zorder=5)
 	plt.plot(X, y)
+	plt.ylabel('CPU utilization(%)') 
+	plt.xlabel('second(s)')
+	plt.title('CPU %utilization changes over time')  
 	plt.show()
 
 # fetch cpu utilization percentage data every 2 seconds in 2 minutes
