@@ -1,4 +1,5 @@
 #my laptop is down!!!!
+#my poor laptop！I'm so sorry of it!
 """
 ================
 The Bayes update
