@@ -32,7 +32,7 @@ def fetchData(fileName, interval, tol_time):
 		dataFile.write(',')
 		if cpu > 70:
 			dataFile.write('1') #abnormal
-		elif memory > 65:
+		elif memory > 72:
 			dataFile.write('1') #abnormal
 		else:
 			dataFile.write('0') #normal
@@ -44,4 +44,4 @@ def fetchData(fileName, interval, tol_time):
 	dataFile.close()
 	
 # fetch cpu utilization percentage data every 2 seconds in 2 minutes
-fetchData('percent_data.txt', 2, 120)
+fetchData('percent_data.txt', 2, 1200)

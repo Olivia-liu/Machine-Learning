@@ -23,12 +23,12 @@ if size(X, 2) <= 3
     plot(plot_x, plot_y)
     
     % Legend, specific for the exercise
-    legend('Admitted', 'Not admitted', 'Decision Boundary')
-    axis([30, 100, 30, 100])
+    legend('Abnormal', 'Normal', 'Decision Boundary')
+    axis([0, 100, 62, 80])
 else
     % Here is the grid range
-    u = linspace(-1, 1.5, 50);
-    v = linspace(-1, 1.5, 50);
+    u = linspace(-1, 1.5, 100);
+    v = linspace(-1, 1.5, 100);
 
     z = zeros(length(u), length(v));
     % Evaluate z = theta*x over the grid

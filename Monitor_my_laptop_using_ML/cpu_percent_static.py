@@ -52,6 +52,6 @@ def plotData(X, y):
 	plt.show()
 
 # fetch cpu utilization percentage data every 2 seconds in 2 minutes
-#fetchCPUPercent('cpu_percent_data.txt', 2, 120)
+fetchCPUPercent('cpu_percent_data.txt', 2, 120)
 (X, y) = loadData('cpu_percent_data.txt')
 plotData(X, y)

@@ -88,11 +88,21 @@ pause;
 prob = sigmoid([1 45 85] * theta);
 fprintf(['For CPU percent with 45 and memory percent with 85, we predict abnormal ' ...
          'probability of %f\n'], prob);
+     
+prob = sigmoid([1 66 35] * theta);
+fprintf(['For CPU percent with 66 and memory percent with 35, we predict abnormal ' ...
+         'probability of %f\n'], prob);
+
+% Load data
+data = load('percent_data_new.txt');
+X2 = data(:, [1, 2]); y2 = data(:, 3);
+[m2, n2] = size(X2);
+X2 = [ones(m2, 1) X2];
 
 % Compute accuracy on the training set
-p = predict(theta, X);
+p = predict(theta, X2);
 
-fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
+fprintf('Train Accuracy: %f\n', mean(double(p == y2)) * 100);
 fprintf('\n');
 
 
