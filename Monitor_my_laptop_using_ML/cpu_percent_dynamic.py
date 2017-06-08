@@ -1,3 +1,5 @@
+#my laptop is down!!!!
+#my poor laptop！I'm so sorry of it!
 """
 plot dynamic graph: cpu %utilization
 """
@@ -22,6 +24,7 @@ def loadData(fileName):
 
 #-----------------------plot graph-----------------------#
 fig, ax = plt.subplots()
+
 x1 = np.arange(0, 122, 2)
 line, = ax.plot(x1, y1)
 
@@ -34,13 +37,9 @@ def init():
     line.set_ydata(np.ma.array(x1, mask=True))
     return line,
 ani = animation.FuncAnimation(fig, animate, np.arange(0, 61), init_func=init,
-                              interval=25, blit=True)
+                              interval=100, blit=True)
 plt.show()
 #---------------------plot graph end----------------------#
-
-
-
-
 
 
 
