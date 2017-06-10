@@ -6,3 +6,6 @@ Assume inside current folder. Type
 and hit enter to run the program.
 
 This program uses data collected from cpu_percent_static.py from the parent folder. 
+
+I PUORED WATER ON MY LAPTOP! OMG
+
