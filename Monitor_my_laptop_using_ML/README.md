@@ -6,3 +6,5 @@ This program will monitor the CPU %utilization every 2 seconds for a total of 2 
 
 # cpu_percent_dynamic.py (python 3.6)
 This program will plot a dynamic graph which reflects the data from cpu_percent_data.txt. This doesn't work as I expected, but it works in an interesting way.
+
+But I broke up with my love today. 
