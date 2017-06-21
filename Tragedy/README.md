@@ -5,3 +5,4 @@ TODO：
 2. Read CSV files
 3. Figure out a cost function
 4. Design neural network
+5. Add layers and test the performance 
