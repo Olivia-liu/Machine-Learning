@@ -1,4 +1,5 @@
 import csv
+import numpy as np
 
 def get_data(filename):
 	#read all columns in X_file
@@ -8,6 +9,11 @@ def get_data(filename):
 	inFile.close()
 	return data
 	
+#return new column
+def normalize(X, col):
+	#calculate average
+	
+	#calculate standard deviation
 	
 	
 	

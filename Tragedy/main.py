@@ -7,7 +7,8 @@ fare_idx = 5
 X_all = get_data('train_X.csv')
 y_all = get_data('train_y.csv')
 
-###---normalize features---###
+###---fill empty features---###
+###--- -1 for female, 1 for male ---###
 total_age = 0
 num_people = 0
 #calculate average age
@@ -26,7 +27,8 @@ for row in X_all:
 	else:
 		row[sex_idx] = '1'
 		
-
+X_all = np.array(X_all, dtype = float)
+y_all = np.array(y_all, dtype = float)
 		
 ###---split train, cross-validation and test sets---###
 X_train = X_all[0:534]
@@ -37,5 +39,9 @@ y_val = y_all[534:712]
 
 X_test = X_all[712:891]
 y_test = y_all[712:891]
+
+###---normalize the training set---###
+normalize(X_train, age_idx)
+normalize(X_train, fare_idx)
 
 
