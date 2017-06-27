@@ -62,7 +62,14 @@ normalize(X_train, age_idx)
 normalize(X_train, fare_idx)
 normalize(X_submit, age_idx)
 normalize(X_submit, fare_idx)
-print(X_submit)
+
+import csv
+outputFile = open('output.csv', 'w', newline='')
+outputWriter = csv.writer(outputFile)
+for row in X_submit:
+	outputWriter.writerow(row)
+outputFile.close()
+
 #print(y_train)
 #-------------- Tensorflow to calculate weights STARTS --------------#
 batch_size = 8
@@ -105,20 +112,25 @@ with tf.Session() as sess:
 		if i%1000 == 0:
 			total_cross_entropy = sess.run(
 				cross_entropy, feed_dict={x: X_train, y_: y_train})
-			print("After %d training steps, cross entropy on all data is %g" %
-				(i, total_cross_entropy))
+			#print("After %d training steps, cross entropy on all data is %g" %
+				#(i, total_cross_entropy))
 			
 	#print(sess.run(
 	#			cross_entropy, feed_dict={x: X_val, y_: y_val}))		
 	#print(sess.run(
 	#			cross_entropy, feed_dict={x: X_test, y_: y_test}))					
-	#print(sess.run(w1))
-	#print(sess.run(w2))
+	print(sess.run(w1))
+	print(sess.run(w2))
+	print(sess.run(w3))
+	
+	print(biases1.eval())
+	print(biases2.eval())
+	print(biases3.eval())
 	
 	#weight1 = sess.run(w1)
 	#weight2 = sess.run(w2)
 	
-	prediction = y
+	#prediction = y
 	#print ("predictions", prediction.eval(feed_dict={x: X_train, y_: y_train}, session=sess))
 	#print(y_train)
 	
