@@ -11,6 +11,7 @@ fare_idx = 5
 #-------------- read data from csv files --------------#
 X_all = get_data('train_X.csv')
 y_all = get_data('train_y.csv')
+X_submit = get_data('submit_X.csv')
 
 #-------------- fill empty features, -1 for female, 1 for male --------------#
 total_age = 0
@@ -31,14 +32,23 @@ for row in X_all:
 	else:
 		row[sex_idx] = '1'
 		
+for row in X_submit:
+	if(row[age_idx] == ''):
+		row[age_idx] = str(average_age)
+	if(row[sex_idx] == 'female'):
+		row[sex_idx] = '-1'
+	else:
+		row[sex_idx] = '1'
+		
 #convert lists to arrays
 X_all = np.array(X_all, dtype = float)
 y_all = np.array(y_all, dtype = float)
+X_submit = np.array(X_submit, dtype = float)
 		
 #-------------- split train, cross-validation and test sets --------------#
-X_train = X_all[0:534]
-y_train = y_all[0:534]
-dataset_size = 534
+X_train = X_all[0:891]
+y_train = y_all[0:891]
+dataset_size = 891
 
 
 X_val = X_all[534:712]
@@ -50,10 +60,12 @@ y_test = y_all[712:891]
 #-------------- normalize the training set --------------#
 normalize(X_train, age_idx)
 normalize(X_train, fare_idx)
-#print(X_train)
+normalize(X_submit, age_idx)
+normalize(X_submit, fare_idx)
+print(X_submit)
 #print(y_train)
 #-------------- Tensorflow to calculate weights STARTS --------------#
-batch_size = 16
+batch_size = 8
 
 # define neural network parameters (weights)
 w1 = tf.Variable(tf.random_normal([6,12], stddev=1, seed=1))
@@ -76,14 +88,14 @@ y = tf.sigmoid(tf.matmul(a2, w3)+biases3)
 cross_entropy = tf.reduce_mean(
 	-y_*tf.log(tf.clip_by_value(y, 1e-10, 1.0)) - (1-y_)*tf.log(tf.clip_by_value(1-y, 1e-10, 1.0)))
 #cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=y, labels=y_)
-train_step = tf.train.GradientDescentOptimizer(0.001).minimize(cross_entropy)
+train_step = tf.train.GradientDescentOptimizer(0.1).minimize(cross_entropy)
 
 # create a session
 with tf.Session() as sess:
 	init_op = tf.initialize_all_variables()
 	sess.run(init_op)
 
-	STEPS = 26000
+	STEPS = 30000
 	for i in range(STEPS):
 		start = (i * batch_size) % dataset_size
 		end = min(start+batch_size, dataset_size)
@@ -107,7 +119,7 @@ with tf.Session() as sess:
 	#weight2 = sess.run(w2)
 	
 	prediction = y
-	print ("predictions", prediction.eval(feed_dict={x: X_train, y_: y_train}, session=sess))
+	#print ("predictions", prediction.eval(feed_dict={x: X_train, y_: y_train}, session=sess))
 	#print(y_train)
 	
 
