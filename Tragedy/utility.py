@@ -10,10 +10,26 @@ def get_data(filename):
 	return data
 	
 #return new column
-def normalize(X, col):
+def normalize(data, col):
 	#calculate average
+	sum = 0
+	num = 0
+	for row in data:
+		sum = sum + row[col]
+		num = num + 1
+	average = sum/num
 	
 	#calculate standard deviation
+	sum2 = 0
+	for row in data:
+		sum2 = sum2 + (row[col] - average)**2
+	std = (sum2/num)**0.5
+	
+	for row in data:
+		row[col] = (row[col] - average)/std
+	
+	
+	
 	
 	
 	
