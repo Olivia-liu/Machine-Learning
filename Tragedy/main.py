@@ -112,8 +112,8 @@ with tf.Session() as sess:
 		if i%1000 == 0:
 			total_cross_entropy = sess.run(
 				cross_entropy, feed_dict={x: X_train, y_: y_train})
-			#print("After %d training steps, cross entropy on all data is %g" %
-				#(i, total_cross_entropy))
+			print("After %d training steps, cross entropy on all data is %g" %
+				(i, total_cross_entropy))
 			
 	#print(sess.run(
 	#			cross_entropy, feed_dict={x: X_val, y_: y_val}))		
