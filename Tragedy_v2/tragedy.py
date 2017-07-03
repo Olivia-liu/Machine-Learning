@@ -1,52 +1,61 @@
-import tensorflow as tf
-from numpy.random import RandomState
+# data analysis and wrangling
+import pandas as pd
+import numpy as np
+import random as rnd
 
-batch_size = 8
+# visualization
+import seaborn as sns
+import matplotlib.pyplot as plt 
+#matplotlib inline
 
-# define neural network parameters (weights)
-w1 = tf.Variable(tf.random_normal([2,3], stddev=1, seed=1))
-w2 = tf.Variable(tf.random_normal([3,1], stddev=1, seed=1))
+# machine learning
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC, LinearSVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import SGDClassifier
+from sklearn.tree import DecisionTreeClassifier
 
-# Use none for small batch
-x = tf.placeholder(tf.float32, shape=(None, 2), name='x-input')
-y_ = tf.placeholder(tf.float32, shape=(None, 1), name='y-input')
+train_df = pd.read_csv('train.csv')
+test_df = pd.read_csv('test.csv')
+combine = [train_df, test_df]
 
-# define forward propagation (no bias)
-a = tf.matmul(x, w1)
-y = tf.matmul(a, w2)
+#print(train_df.columns.values)
 
-# define cost function and back propagation algorithm
-cross_entropy = -tf.reduce_mean(
-	y_*tf.log(tf.clip_by_value(y, 1e-10, 1.0)))
-train_step = tf.train.AdamOptimizer(0.001).minimize(cross_entropy)
+# preview the data
+#print(train_df.head())
+#print(train_df.tail())
 
-# use random to generate a model data set
-rdm = RandomState(1)
-dataset_size = 128
-X = rdm.rand(dataset_size, 2)
-Y = [[int(x1+x2 < 1)] for (x1, x2) in X]
+#print(train_df.info())
+#print(test_df.info())
 
-# create a session
-with tf.Session() as sess:
-	init_op = tf.initialize_all_variables()
-	sess.run(init_op)
-	print(sess.run(w1))
-	print(sess.run(w2))
+#print(train_df.describe())
+# Review survived rate using `percentiles=[.61, .62]` knowing our problem description mentions 38% survival rate.
+# Review Parch distribution using `percentiles=[.75, .8]`
+# SibSp distribution `[.68, .69]`
+# Age and Fare `[.1, .2, .3, .4, .5, .6, .7, .8, .9, .99]`
 
-	STEPS = 5000
-	for i in range(STEPS):
-		start = (i * batch_size) % dataset_size
-		end = min(start+batch_size, dataset_size)
-		
-		sess.run(train_step,
-				feed_dict={x: X[start:end], y_: Y[start:end]})
-		if i%1000 == 0:
-			total_cross_entropy = sess.run(
-				cross_entropy, feed_dict={x: X, y_: Y})
-			print("After %d training steps, cross entropy on all data is %g" %
-				(i, total_cross_entropy))
-				
-	print(sess.run(w1))
-	print(sess.run(w2))
-	
-	
+#print(train_df.describe(include=['O']))
+#print(train_df[['Pclass', 'Survived']].groupby(['Pclass'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+#print(train_df[["Sex", "Survived"]].groupby(['Sex'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+#print(train_df[["SibSp", "Survived"]].groupby(['SibSp'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+#print(train_df[["Parch", "Survived"]].groupby(['Parch'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+
+g = sns.FacetGrid(train_df, col='Survived')
+g.map(plt.hist, 'Age', bins=20)
+#plt.show()
+
+# grid = sns.FacetGrid(train_df, col='Pclass', hue='Survived')
+grid = sns.FacetGrid(train_df, col='Survived', row='Pclass', size=2.2, aspect=1.6)
+grid.map(plt.hist, 'Age', alpha=.5, bins=20)
+grid.add_legend();
+#plt.show()
+
+# grid = sns.FacetGrid(train_df, col='Embarked')
+grid = sns.FacetGrid(train_df, row='Embarked', size=2.2, aspect=1.6)
+grid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette='deep')
+grid.add_legend()
+plt.show()
+
