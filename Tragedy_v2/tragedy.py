@@ -57,5 +57,5 @@ grid.add_legend();
 grid = sns.FacetGrid(train_df, row='Embarked', size=2.2, aspect=1.6)
 grid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette='deep')
 grid.add_legend()
-plt.show()
+#plt.show()
 
