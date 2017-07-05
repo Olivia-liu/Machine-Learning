@@ -59,3 +59,21 @@ grid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette='deep')
 grid.add_legend()
 #plt.show()
 
+# grid = sns.FacetGrid(train_df, col='Embarked', hue='Survived', palette={0: 'k', 1: 'w'})
+grid = sns.FacetGrid(train_df, row='Embarked', col='Survived', size=2.2, aspect=1.6)
+grid.map(sns.barplot, 'Sex', 'Fare', alpha=.5, ci=None)
+grid.add_legend()
+
+print("Before", train_df.shape, test_df.shape, combine[0].shape, combine[1].shape)
+
+train_df = train_df.drop(['Ticket', 'Cabin'], axis=1)
+test_df = test_df.drop(['Ticket', 'Cabin'], axis=1)
+combine = [train_df, test_df]
+
+"After", train_df.shape, test_df.shape, combine[0].shape, combine[1].shape
+
+for dataset in combine:
+    dataset['Title'] = dataset.Name.str.extract(' ([A-Za-z]+)\.', expand=False)
+
+pd.crosstab(train_df['Title'], train_df['Sex'])
+
