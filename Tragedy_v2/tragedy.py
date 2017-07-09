@@ -104,3 +104,34 @@ for dataset in combine:
 
 train_df.head()
 
+# grid = sns.FacetGrid(train_df, col='Pclass', hue='Gender')
+grid = sns.FacetGrid(train_df, row='Pclass', col='Sex', size=2.2, aspect=1.6)
+grid.map(plt.hist, 'Age', alpha=.5, bins=20)
+grid.add_legend()
+
+guess_ages = np.zeros((2,3))
+guess_ages
+
+for dataset in combine:
+    for i in range(0, 2):
+        for j in range(0, 3):
+            guess_df = dataset[(dataset['Sex'] == i) & \
+                                  (dataset['Pclass'] == j+1)]['Age'].dropna()
+
+            # age_mean = guess_df.mean()
+            # age_std = guess_df.std()
+            # age_guess = rnd.uniform(age_mean - age_std, age_mean + age_std)
+
+            age_guess = guess_df.median()
+
+            # Convert random age float to nearest .5 age
+            guess_ages[i,j] = int( age_guess/0.5 + 0.5 ) * 0.5
+            
+    for i in range(0, 2):
+        for j in range(0, 3):
+            dataset.loc[ (dataset.Age.isnull()) & (dataset.Sex == i) & (dataset.Pclass == j+1),\
+                    'Age'] = guess_ages[i,j]
+
+    dataset['Age'] = dataset['Age'].astype(int)
+
+train_df.head()
