@@ -43,7 +43,7 @@ combine = [train_df, test_df]
 #print(train_df[["SibSp", "Survived"]].groupby(['SibSp'], as_index=False).mean().sort_values(by='Survived', ascending=False))
 #print(train_df[["Parch", "Survived"]].groupby(['Parch'], as_index=False).mean().sort_values(by='Survived', ascending=False))
 
-g = sns.FacetGrid(train_df, col='Survived')
+#g = sns.FacetGrid(train_df, col='Survived')
 #g.map(plt.hist, 'Age', bins=20)
 #plt.show()
 
@@ -99,23 +99,23 @@ g = sns.FacetGrid(train_df, col='Survived')
 #combine = [train_df, test_df]
 #train_df.shape, test_df.shape
 
-for dataset in combine:
-    dataset['Sex'] = dataset['Sex'].map( {'female': 1, 'male': 0} ).astype(int)
+#for dataset in combine:
+   # dataset['Sex'] = dataset['Sex'].map( {'female': 1, 'male': 0} ).astype(int)
 
-train_df.head()
+#train_df.head()
 
 # grid = sns.FacetGrid(train_df, col='Pclass', hue='Gender')
-grid = sns.FacetGrid(train_df, row='Pclass', col='Sex', size=2.2, aspect=1.6)
-grid.map(plt.hist, 'Age', alpha=.5, bins=20)
-grid.add_legend()
+#grid = sns.FacetGrid(train_df, row='Pclass', col='Sex', size=2.2, aspect=1.6)
+#grid.map(plt.hist, 'Age', alpha=.5, bins=20)
+#grid.add_legend()
 
-guess_ages = np.zeros((2,3))
-guess_ages
+#guess_ages = np.zeros((2,3))
+#guess_ages
 
-for dataset in combine:
-    for i in range(0, 2):
-        for j in range(0, 3):
-            guess_df = dataset[(dataset['Sex'] == i) & \
+#for dataset in combine:
+ #   for i in range(0, 2):
+  #      for j in range(0, 3):
+   #         guess_df = dataset[(dataset['Sex'] == i) & \
                                   (dataset['Pclass'] == j+1)]['Age'].dropna()
 
             # age_mean = guess_df.mean()
