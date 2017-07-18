@@ -1,3 +1,5 @@
+#Source: https://www.kaggle.com/startupsci/titanic-data-science-solutions
+
 # data analysis and wrangling
 import pandas as pd
 import numpy as np
@@ -18,34 +20,51 @@ from sklearn.linear_model import Perceptron
 from sklearn.linear_model import SGDClassifier
 from sklearn.tree import DecisionTreeClassifier
 
+# we start by acquiring the training and testing datasets into Pandas DataFrames.
 train_df = pd.read_csv('train.csv')
 test_df = pd.read_csv('test.csv')
 combine = [train_df, test_df]
 
-#print(train_df.columns.values)
+print(train_df.columns.values)
+print('_'*80)
 
 # preview the data
-#print(train_df.head())
-#print(train_df.tail())
+print(train_df.head())
+print('_'*80)
+print(train_df.tail())
+print('_'*80)
 
-#print(train_df.info())
-#print(test_df.info())
+#  basic dataframe info
+print(train_df.info())
+print('_'*80)
+print(test_df.info())
 
-#print(train_df.describe())
+# What is the distribution of numerical feature values across the samples?
+print('_'*80)
+print(train_df.describe())
 # Review survived rate using `percentiles=[.61, .62]` knowing our problem description mentions 38% survival rate.
 # Review Parch distribution using `percentiles=[.75, .8]`
 # SibSp distribution `[.68, .69]`
 # Age and Fare `[.1, .2, .3, .4, .5, .6, .7, .8, .9, .99]`
 
-#print(train_df.describe(include=['O']))
-#print(train_df[['Pclass', 'Survived']].groupby(['Pclass'], as_index=False).mean().sort_values(by='Survived', ascending=False))
-#print(train_df[["Sex", "Survived"]].groupby(['Sex'], as_index=False).mean().sort_values(by='Survived', ascending=False))
-#print(train_df[["SibSp", "Survived"]].groupby(['SibSp'], as_index=False).mean().sort_values(by='Survived', ascending=False))
-#print(train_df[["Parch", "Survived"]].groupby(['Parch'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+# What is the distribution of categorical features?
+print('_'*80)
+print(train_df.describe(include=['O']))
 
+# Analyze by pivoting features
+print('_'*80)
+print(train_df[['Pclass', 'Survived']].groupby(['Pclass'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+print('_'*80)
+print(train_df[["Sex", "Survived"]].groupby(['Sex'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+print('_'*80)
+print(train_df[["SibSp", "Survived"]].groupby(['SibSp'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+print('_'*80)
+print(train_df[["Parch", "Survived"]].groupby(['Parch'], as_index=False).mean().sort_values(by='Survived', ascending=False))
+
+# Analyze by visualizing data
 g = sns.FacetGrid(train_df, col='Survived')
 g.map(plt.hist, 'Age', bins=20)
-#plt.show()
+plt.show()
 
 # grid = sns.FacetGrid(train_df, col='Pclass', hue='Survived')
 grid = sns.FacetGrid(train_df, col='Survived', row='Pclass', size=2.2, aspect=1.6)
@@ -53,7 +72,7 @@ grid.map(plt.hist, 'Age', alpha=.5, bins=20)
 grid.add_legend();
 #plt.show()
 
-# grid = sns.FacetGrid(train_df, col='Embarked')
+""""# grid = sns.FacetGrid(train_df, col='Embarked')
 grid = sns.FacetGrid(train_df, row='Embarked', size=2.2, aspect=1.6)
 grid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette='deep')
 grid.add_legend()
@@ -149,4 +168,4 @@ train_df.head()
 
 train_df = train_df.drop(['AgeBand'], axis=1)
 combine = [train_df, test_df]
-train_df.head()
+train_df.head()"""
