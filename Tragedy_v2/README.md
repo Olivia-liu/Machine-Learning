@@ -6,5 +6,3 @@ TODO
 2. Read the kernels
 3. Implement another nn using new features
 4. Read the website and the tensorflow book
-
-I went shopping today.
