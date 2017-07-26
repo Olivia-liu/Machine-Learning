@@ -6,3 +6,4 @@ This repository includes my personal machine learning projects and research.
 2. Predict live or die using data from Kaggle
 
 I almost lost internet connection today. 
+So I played Zelda today.
