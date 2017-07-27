@@ -7,3 +7,4 @@ This repository includes my personal machine learning projects and research.
 
 I almost lost internet connection today. 
 So I played Zelda today.
+On my way to Qingdao.
