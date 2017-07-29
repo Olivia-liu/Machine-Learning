@@ -9,3 +9,4 @@ I almost lost internet connection today.
 So I played Zelda today.
 On my way to Qingdao.
 I went to Qingdao Poles Seaworld today.
+I went to Mount Lao today.
