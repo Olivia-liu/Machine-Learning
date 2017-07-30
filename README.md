@@ -10,3 +10,4 @@ So I played Zelda today.
 On my way to Qingdao.
 I went to Qingdao Poles Seaworld today.
 I went to Mount Lao today.
+I went to Qingdao Medical School today, my parents' mother school.
