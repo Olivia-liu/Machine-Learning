@@ -1,4 +1,4 @@
-# Tool used: TensorFlow, Python 3
+# Tools used: TensorFlow, Python 3
 1. train.csv is the given training data . 
 2. train_y.csv contains the y values of train.csv without title row
 3. trian_X.csv contains the 6 features (feature scaling applied)
